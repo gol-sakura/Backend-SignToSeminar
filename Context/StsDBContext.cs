@@ -29,7 +29,8 @@ namespace Backend_SignToSeminar_WebApplication.Context
             modelBuilder.Entity<Seminar>()
                 .HasMany(s => s.Bookings)
                 .WithOne(b => b.Seminar)
-                .IsRequired();
+                .HasForeignKey(b => b.SeminarId);
+                
 
 
             //modelBuilder.Entity<Booking>()
