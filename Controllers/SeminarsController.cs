@@ -25,7 +25,7 @@ namespace Backend_SignToSeminar_WebApplication.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Seminar>>> GetAllSeminar()
         {
-            return await _context.Seminars.ToListAsync();
+            return await _context.Seminars.Include(s => s.Bookings).ToListAsync();
         }
 
         // GET: api/Seminars/5
