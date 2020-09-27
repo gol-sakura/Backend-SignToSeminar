@@ -32,7 +32,7 @@ namespace Backend_SignToSeminar_WebApplication.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Seminar>> GetSeminarById(int id)
         {
-            var seminar = await _context.Seminars.FindAsync(id);
+            var seminar = await _context.Seminars.Include(s => s.Bookings).FirstOrDefaultAsync(s => s.Id == id);
 
             if (seminar == null)
             {
