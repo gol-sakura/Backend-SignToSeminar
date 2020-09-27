@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,7 +46,7 @@ namespace Backend_SignToSeminar_WebApplication.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSeminar(int id, Seminar seminar)
+        public async Task<IActionResult> UpdateSeminar(int id, Seminar seminar)
         {
             var dbSeminar = await _context.Seminars.FindAsync(id);
             if (dbSeminar == null)
@@ -69,7 +69,7 @@ namespace Backend_SignToSeminar_WebApplication.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Seminar>> PostSeminar(Seminar seminar)
+        public async Task<ActionResult<Seminar>> AddSeminar(Seminar seminar)
         {
             _context.Seminars.Add(seminar);
             await _context.SaveChangesAsync();
