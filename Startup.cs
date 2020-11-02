@@ -33,6 +33,11 @@ namespace Backend_SignToSeminar_WebApplication
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
+            services.AddCors(o => o.AddPolicy("CORSPolicy", builder =>
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()));
+
             services.AddDbContext<StsDBContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
         }
 
@@ -49,6 +54,8 @@ namespace Backend_SignToSeminar_WebApplication
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("CORSPolicy");
 
             app.UseEndpoints(endpoints =>
             {

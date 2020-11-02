@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend_SignToSeminar_WebApplication.Context;
 using Backend_SignToSeminar_WebApplication.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace Backend_SignToSeminar_WebApplication.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("CORSPolicy")]
     [ApiController]
     public class SeminarsController : ControllerBase
     {
@@ -59,6 +61,7 @@ namespace Backend_SignToSeminar_WebApplication.Controllers
             dbSeminar.SeminarDateTime = seminar.SeminarDateTime;
             dbSeminar.Seats = seminar.Seats;
             dbSeminar.Description = seminar.Description;
+            dbSeminar.Bookings = seminar.Bookings;
 
             await _context.SaveChangesAsync();
 
