@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +34,7 @@ namespace Backend_SignToSeminar_WebApplication.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Booking>> GetBookingById(int id)
         {
-            var booking = await _context.Bookings.FindAsync(id);
+            var booking = await _context.Bookings.Include(b => b.Seminar).FirstOrDefaultAsync(b => b.Id == id);
 
             if (booking == null)
             {
@@ -48,7 +48,7 @@ namespace Backend_SignToSeminar_WebApplication.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBooking(int id, Booking booking)
+        public async Task<IActionResult> UpdateBooking(int id, Booking booking)
         {
             var dbBooking = await _context.Bookings.FindAsync(id);
             if (dbBooking == null)
@@ -72,7 +72,7 @@ namespace Backend_SignToSeminar_WebApplication.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Booking>> PostBooking(Booking booking)
+        public async Task<ActionResult<Booking>> AddBooking(Booking booking)
         {
             var seminar = _context.Seminars.Where(s => s.Id == booking.SeminarId).FirstOrDefault();
             var _booking = new Booking

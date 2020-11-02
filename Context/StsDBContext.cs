@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,17 +26,18 @@ namespace Backend_SignToSeminar_WebApplication.Context
        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configures One-to-many relationship
-            modelBuilder.Entity<Seminar>()
-                .HasMany(s => s.Bookings)
-                .WithOne(b => b.Seminar)
-                .IsRequired();
+            
+            // modelBuilder.Entity<Seminar>()
+            //     .HasMany(s => s.Bookings)
+            //     .WithOne(b => b.Seminar)
+            //     .IsRequired();
                 
 
 
-            //modelBuilder.Entity<Booking>()
-            //   .HasRequired<Seminar>(b => b.Seminar)
-            //   .WithMany(s => s.Bookings)
-            //   .HasForeignKey<int>(b => b.SeminarId);
+            modelBuilder.Entity<Booking>()
+            .HasRequired<Seminar>(b => b.Seminar)
+            .WithMany(s => s.Bookings)
+              .HasForeignKey<int>(b => b.SeminarId);
         }
 
     }
